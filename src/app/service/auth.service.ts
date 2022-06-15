@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, Subject, tap } from 'rxjs';
 
 
 @Injectable({
@@ -9,14 +9,10 @@ import { map, Observable, tap } from 'rxjs';
 
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080/api/';
+  AUTHORIZATION_TOKEN = 'authenticatedIser';
+  USERNAME='username';  
+  public usernameSubject=new Subject<String>();
 
-  authenticated = false;
-
-  public username: String = '';
-  public password: String = '';
-
-  USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser';
 
   constructor(private http: HttpClient) { }
 
@@ -27,48 +23,45 @@ export class AuthService {
       authorization: this.createBasicAuthToken(username, password)
     } : {});
 
-    return this.http.get<any>(this.apiUrl + 'login', {
+    return this.http.get<any>( 'login', {
       headers: headers
     })
       .pipe(map((auth) => {
-        console.log("i am  login user :: " + auth.username + " : " + auth.password);
-        sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, auth.username)
-        this.username = username;
-        this.password = password;
+        sessionStorage.setItem(this.USERNAME,""+username);
+        this.usernameSubject.next(username);
+        sessionStorage.setItem(this.AUTHORIZATION_TOKEN, this.createBasicAuthToken(username, password));
         return auth.authority;
       }));
-
-
   }
 
 
   logout() {
-
-    let headers = new HttpHeaders({'Authorization': this.createBasicAuthToken('admin', 'admin') });
-
-    headers=headers.append('Access-Control-Allow-Origin', '*');
-   
-    let options = {headers:headers};
-
-    return this.http.post<any>(this.apiUrl + 'logot',null,options/*  { headers: headers } */)
+    sessionStorage.removeItem(this.USERNAME);
+    sessionStorage.removeItem(this.AUTHORIZATION_TOKEN);
+    this.usernameSubject.next('');
+    return this.http.post<any>('logout', null)
       .pipe(tap(() => {
-        sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
-        this.username = '';
-        this.password = '';
-        console.log("i am logout user:   "+this.username);
+     
       }
       ));
-
   }
 
-  isUserLoggedIn() {
-    let user = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME)
-    if (user === null) return false
-    return true
-  }
+
+  getToken(){
+      return sessionStorage.getItem(this.AUTHORIZATION_TOKEN);
+    }
 
   createBasicAuthToken(username: String, password: String) {
     return 'basic ' + window.btoa(username + ":" + password)
+  }
+
+  validate(data:String){
+    const pattern = /^[a-zA-Z0-9]+$/;
+    let result = false;
+    if (data.match(pattern)) {
+          result = true;
+    }
+    return result;
   }
 
 }

@@ -11,18 +11,24 @@ export class HttpInterceptorService implements HttpInterceptor {
   constructor(private authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): NewType {
-      if (this.authService.isUserLoggedIn()  /* && req.url.indexOf('api') === -1 */ ) {
-        console.log("header:: "+this.authService.username+" : "+this.authService.password);
 
-        const authReq = req.clone({
-              headers: new HttpHeaders({
+
+   let token=this.authService.getToken();
+   const baseUrl='http://localhost:8080/api/';
+   const myReq=req.clone({ url: `${baseUrl}${req.url}`});
+   
+   
+   if(token){
+
+        const authReq = myReq.clone(
+            {     headers: new HttpHeaders({
                   'Content-Type': 'application/json',
-                  'Authorization':  'basic ' + window.btoa("admin:admin")
+                  'Authorization': token/*  'basic ' + window.btoa("admin:admin" )*/
               })
           });
-          return next.handle(req);
+          return next.handle(authReq);
       } else {
-          return next.handle(req);
+          return next.handle(myReq);
       }
   }
 }

@@ -9,24 +9,29 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-//	credentials = {username: '', password: ''};
-username : String = '';
-password : String = '';
+
+	username: String = '';
+	password: String = '';
 	error: string = '';
 
 	constructor(private authService: AuthService, private router: Router) { }
 
 	ngOnInit(): void {
+	
+		this.authService.logout();
+
 	}
 
 	doLogin() {
-		if (this.username !== '' && this.username !== null 
-		&& this.password !== '' && this.password !== null) {
-			this.authService.login(this.username,this.password).subscribe({next: (authority) => {
+		if (this.username !== '' && this.username !== null && this.authService.validate(this.username)
+			&& this.password !== '' && this.password !== null) {
+			this.authService.login(this.username, this.password).subscribe({
+				next: (authority) => {
+
 					if (authority == 'SUPER') {
 						this.router.navigate(['/super']);
 					}
-					if (authority == 'ADMIN'){
+					if (authority == 'ADMIN') {
 						this.router.navigate(['/admin']);
 					}
 

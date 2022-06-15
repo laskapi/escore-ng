@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CompetitionsComponent } from './competitions.component';
+import { NewCompModalComponent } from './new-comp-modal.component';
 
-describe('CompetitionsComponent', () => {
-  let component: CompetitionsComponent;
-  let fixture: ComponentFixture<CompetitionsComponent>;
+describe('NewCompModalComponent', () => {
+  let component: NewCompModalComponent;
+  let fixture: ComponentFixture<NewCompModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CompetitionsComponent ]
+      declarations: [ NewCompModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CompetitionsComponent);
+    fixture = TestBed.createComponent(NewCompModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

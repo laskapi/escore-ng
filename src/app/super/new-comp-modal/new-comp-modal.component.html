@@ -1,0 +1,54 @@
+<!-- Button trigger modal new competition -->
+<button type="button" class="btn btn-primary" (click)="openModal()">
+    Add new competition
+</button>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}"autofocus >
+   
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="competitionModalLabel">Competition</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body flexcontainer" >
+                <div style="color : red" *ngIf='error'>{{error}}</div>
+                <div class="row py-3 justify-content-center">
+                    <label class="col-4" for="cname">Competition name :</label>
+                    <input class="col-7" type="text" [(ngModel)]="cName" id="cname" name="cname" #autofocus>
+                </div>
+
+                <div class="row py-3 justify-content-center">
+                    <label class="col-4" for="cadmin">Admin name :</label>
+               
+
+                    <select class="col-7" #adminSelect>
+                        <option value="" hidden selected disabled>Select an admin</option>
+                        <option *ngFor="let u of users" [value]="u.username">{{u.username}}</option>
+                    </select>
+                </div>
+
+      <!--           <div class="row py-3 justify-content-center">
+                    <label class="col-4" for="cpass">Password :</label>
+                    <input class="col-5" type="text" [(ngModel)]="cPass" id="cpass" name="cpass" disabled={{!isPassEditable}} >
+                    <div class="col-2 justify-content-center">
+                     
+                        <input class="col-10 " type="checkbox" id="passCheckbox" [(ngModel)]="isPassEditable" />
+                        <label class="col-1" for="editPassBox">edit</label>
+
+                    </div>
+                   
+                </div> -->
+
+            </div>
+
+            <div class="modal-footer align-items-center justify-content-between">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="closeModal(false)">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="closeModal(true)">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>

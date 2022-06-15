@@ -1,9 +1,8 @@
-<div class="container">
-
-
-    <a *ngIf="authService.isUserLoggedIn()" (click)=logout()>Logout</a>
+<div class="d-flex align-items-center justify-content-between bg-primary ">
+        <h1 class="text-white p-3">{{title}}</h1>
     
+        <h4 *ngIf="username" class="text-white">Witaj {{username}} !</h4>
     
-    </div>
+    <button class="btn btn-light" *ngIf="authService.getToken()" (click)=handleLogout()>Logout</button>
 
-<p>menu works!</p>
+</div>
