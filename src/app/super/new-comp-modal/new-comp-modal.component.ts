@@ -29,11 +29,9 @@ export class NewCompModalComponent implements OnInit {
   openModal() {
   this.error='';
     this.displayStyle = "block";
-    console.log(this.autofocus?.nativeElement);
-    this.autofocus?.nativeElement.focus();
-    this.autofocus!.nativeElement.setAttribute("autofocus");
+    setTimeout(()=>{this.autofocus!.nativeElement.focus()});
  
-    console.log(this.autofocus?.nativeElement);
+    
   }
 
   closeModal(save: boolean) {

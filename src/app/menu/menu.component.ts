@@ -29,10 +29,7 @@ export class MenuComponent implements OnInit {
   }
   handleLogout() {
 
-    this.authService.logout().subscribe(() => {
-      this.router.navigateByUrl('/login');
-    }
-    );
+    this.router.navigateByUrl('/login');
 
   }
 }
