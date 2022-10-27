@@ -12,6 +12,9 @@ import { AdminComponent } from './admin/admin.component';
 import { HttpInterceptorService } from './service/http-interceptor.service';
 import { MenuComponent } from './menu/menu.component';
 import { NewCompModalComponent } from './super/new-comp-modal/new-comp-modal.component';
+import { SuCompComponent } from './super/su-comp/su-comp.component';
+import { SuUserComponent } from './super/su-user/su-user.component';
+import { SuTableComponent } from './super/su-table/su-table.component';
 
 
 
@@ -25,7 +28,11 @@ import { NewCompModalComponent } from './super/new-comp-modal/new-comp-modal.com
     SuperComponent,
     AdminComponent,
     MenuComponent,
-    NewCompModalComponent
+    NewCompModalComponent,
+    SuCompComponent,
+    SuUserComponent,
+    SuUserComponent,
+    SuTableComponent
   ],
   imports: [
     BrowserModule,

@@ -1,16 +1,19 @@
 <p>
-    <!-- Competitions table -->
-<table class="table table-dark">
-    <tbody>
-        <tr *ngFor="let data of competitions">
-            <td>{{data.name}}</td>
-            <td>{{data.admin.username}}</td>
-
-        </tr>
-    </tbody>
-</table>
 
 
+  <!--    <nav class="nav">
+   
+        <a class="nav-link" routerLink="/super/superComp">Competitions</a>
+      
+        <a class="nav-link" routerLink="/super/superUser">Users</a>
+      </nav>       -->
 
-<!-- New competition modal -->
+  <app-su-table></app-su-table>
+
+<div [ngSwitch]="selectionService.userSwitch">
+  <app-su-comp *ngSwitchCase="UserSwitch.Comp"></app-su-comp>
+  <app-su-user *ngSwitchCase="UserSwitch.User"></app-su-user>
+</div>
 <app-new-comp-modal (refreshParent)="ngOnInit()"></app-new-comp-modal>
+
+ <!--  <router-outlet></router-outlet> -->

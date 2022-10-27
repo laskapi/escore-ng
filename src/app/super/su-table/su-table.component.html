@@ -1,0 +1,58 @@
+<div class="d-flex  p-3 justify-content-center">
+    <div class="text-center px-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Users</th>
+                </tr>
+            </thead>
+            <tr>
+                <th>
+                    <button type="button" class="btn" (click)="onSelectUser('')">show all competitions</button>
+                </th>
+            </tr>
+            <tr *ngFor="let user of users">
+                <th>
+                    <button type="button" class="btn" (click)="onSelectUser(user.username)">{{user.username}}</button>
+                </th>
+            </tr>
+        </table>
+    </div>
+
+    <div class="text-center px-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Competitions</th>
+                    <th> <label>archived</label></th>
+                </tr>
+            </thead>
+            <tr *ngFor="let comp of competitions">
+                <th>
+                    <button type="button" class=" btn" (click)="onSelectComp(comp)">{{comp.name}}</button>
+                </th>
+              <th>
+                comp.
+                    <!-- <input type="checkbox" [(ngModel)]="comp.archived" (change)="onArchivedChanged(comp.archived)"> -->
+                </th>            
+            </tr>
+        </table>
+    </div>
+
+
+</div>
+
+
+
+
+<!-- <div *ngFor ="let user of users" class="d-grid">
+    <button type ="button" class="btn btn-light" (click)="onSelectUser(user)" >{{user.username}}</button>
+</div> -->
+
+<!-- <div class="flex-fill">
+
+    <div *ngFor="let comp of competitions" class="d-grid">
+        <button type="button" class=" btn btn-success">{{comp.name}}</button>
+    </div>
+
+</div> -->

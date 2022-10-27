@@ -17,6 +17,7 @@ export class MenuComponent implements OnInit {
 
   title = 'Escore ' + this.appComponent.version.toFixed(1);
 
+
   ngOnInit(): void {
     
     let user = sessionStorage.getItem(this.authService.USERNAME);

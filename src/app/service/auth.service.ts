@@ -10,8 +10,8 @@ import { map, Observable, Subject, tap } from 'rxjs';
 export class AuthService {
 
   AUTHORIZATION_TOKEN = 'authenticatedIser';
-  USERNAME='username';  
-  public usernameSubject=new Subject<String>();
+  USERNAME = 'username';
+  public usernameSubject = new Subject<String>();
 
 
   constructor(private http: HttpClient) { }
@@ -23,11 +23,11 @@ export class AuthService {
       authorization: this.createBasicAuthToken(username, password)
     } : {});
 
-    return this.http.get<any>( 'login', {
+    return this.http.get<any>('login', {
       headers: headers
     })
       .pipe(map((auth) => {
-        sessionStorage.setItem(this.USERNAME,""+username);
+        sessionStorage.setItem(this.USERNAME, "" + username);
         this.usernameSubject.next(username);
         sessionStorage.setItem(this.AUTHORIZATION_TOKEN, this.createBasicAuthToken(username, password));
         return auth.authority;
@@ -41,25 +41,25 @@ export class AuthService {
     this.usernameSubject.next('');
     return this.http.post<any>('logout', null)
       .pipe(tap(() => {
-     
+
       }
       ));
   }
 
 
-  getToken(){
-      return sessionStorage.getItem(this.AUTHORIZATION_TOKEN);
-    }
+  getToken() {
+    return sessionStorage.getItem(this.AUTHORIZATION_TOKEN);
+  }
 
   createBasicAuthToken(username: String, password: String) {
     return 'basic ' + window.btoa(username + ":" + password)
   }
 
-  validate(data:String){
+  validate(data: String) {
     const pattern = /^[a-zA-Z0-9]+$/;
     let result = false;
     if (data.match(pattern)) {
-          result = true;
+      result = true;
     }
     return result;
   }

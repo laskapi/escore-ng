@@ -3,6 +3,8 @@
     
         <h4 *ngIf="username" class="text-white">Witaj {{username}} !</h4>
     
-    <button class="btn btn-light" *ngIf="authService.getToken()" (click)=handleLogout()>Logout</button>
+
+      
+    <button class="mx-3 btn btn-light" *ngIf="authService.getToken()" (click)=handleLogout()>Logout</button>
 
 </div>

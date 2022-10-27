@@ -1,0 +1,21 @@
+<!-- Competitions table -->
+<div class="d-flex justify-content-center">
+    <div>
+        <div>
+            Competition name :
+            <input type="text" [disabled]="!isNameEditable" [(ngModel)]="comp.name">
+            <label> Edit </label>
+            <input type="checkbox" [(ngModel)]="isNameEditable">
+        
+
+        </div>
+        <div>
+            Is archived :
+            <input type="checkbox">
+        </div>
+     
+        <div>
+            <button (click)="save()">save Changes</button>
+        </div>
+    </div>
+</div>

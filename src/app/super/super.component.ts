@@ -1,8 +1,9 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { SelectionService } from './selection.service';
+import { UserSwitch } from './commons';
 
-import { AuthService } from '../service/auth.service';
-import { SuperService } from '../service/super.service';
+
 
 @Component({
   selector: 'app-super',
@@ -10,21 +11,11 @@ import { SuperService } from '../service/super.service';
   styleUrls: ['./super.component.css']
 })
 export class SuperComponent implements OnInit {
-
-  competitions?: any[];
-
-
-  constructor(private superService: SuperService) { }
-
+/* comp:UserSwitch=UserSwitch.Comp;
+user:UserSwitch=UserSwitch.User; */
+public UserSwitch=UserSwitch;
+ constructor(public selectionService:SelectionService){};
   ngOnInit(): void {
-    this.superService.getCompetitions().subscribe(data => this.competitions = data);
-
-
+  
   }
-
-
-  /* generatePass(){
-    this.cPass= Math.random().toString(36).slice(2);
-  } */
-
 }
